@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import bgImage from "./assets/bg-intro-mobile.png";
-import React, { useState } from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import Error_img from "./assets/icon-error.svg";
 
 function Mainpage() {
+  const { register, handleSubmit } = useForm();
+
   return (
     <>
       <Maincontainer>
@@ -20,13 +24,47 @@ function Mainpage() {
             <Span2> $20/mo. thereafter</Span2>
           </Pricecard>
           <Inputcard>
-            <Input type="text" placeholder="First Name" />
-            <Input type="text" placeholder="Last Name" />
-            <Input type="text" placeholder="Email Address" />
-            <Input type="Password" placeholder="Password" />
-            <Button>CLAIM YOUR FREE TRIAL</Button>
+            <form>
+              <Inputdiv>
+                <Input
+                  onFocus={() => console.log("focused")}
+                  onBlur={() => console.log("blur")}
+                  type="text"
+                  placeholder="First Name"
+                />
+                <Error_text>First Name cannot be empty</Error_text>
+              </Inputdiv>
+              <Inputdiv>
+                <Input
+                  onFocus={() => console.log("focused")}
+                  onBlur={() => console.log("blur")}
+                  type="text"
+                  placeholder="Last Name"
+                />
+                <Error_text>Last Name cannot be empty</Error_text>
+              </Inputdiv>
+              <Inputdiv>
+                <Input
+                  onFocus={() => console.log("focused")}
+                  onBlur={() => console.log("blur")}
+                  type="text"
+                  placeholder="Email Address"
+                />
+                <Error_text>Looks like this is not an email</Error_text>
+              </Inputdiv>
+              <Inputdiv>
+                <Input
+                  onFocus={() => console.log("focused")}
+                  onBlur={() => console.log("blur")}
+                  type="password"
+                  placeholder="Password"
+                />
+                <Error_text>Password cannot be empty</Error_text>
+              </Inputdiv>
+              <Button type="submit">CLAIM YOUR FREE TRIAL</Button>
+            </form>
             <Services>
-              By clicking the button, you are agreeing to our{" "}
+              By clicking the button, you are agreeing to our
               <Span3>Terms and Services</Span3>
             </Services>
           </Inputcard>
@@ -131,7 +169,22 @@ const Inputcard = styled.div`
   padding-top: 20px;
 `;
 
+const Inputdiv = styled.div``;
+
+const Error_text = styled.p`
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 16.5px;
+  text-align: right;
+  color: #ff7979;
+`;
 const Input = styled.input`
+  background-image: url(${Error_img});
+  background-repeat: no-repeat;
+  background-position: 95%;
+  background-size: 24px;
   width: 279px;
   height: 56px;
   border: 2px solid #dedede;
@@ -144,7 +197,8 @@ const Input = styled.input`
   outline: none;
   border-radius: 10px;
   opacity: 75%;
-  padding-left: 10px;
+  color: #3d3b48;
+  padding: 0px 50px 0px 10px;
 `;
 
 const Button = styled.button`
